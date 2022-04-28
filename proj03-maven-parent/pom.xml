@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zhouge.maven</groupId>
+  <artifactId>proj03-maven-parent</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  
+  <!-- 只有打包方式为pom的工程，才可以管理maven子工程 -->
+  <packaging>pom</packaging>
+
+  <name>proj03-maven-parent</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	
+	<!--
+		自定义标签  可使用${标签名} 进行引用
+		<version>5.1.5.RELEASE</version>
+	-->
+	<com.zhouge.springVersion>5.1.5.RELEASE</com.zhouge.springVersion>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <!-- 聚合配置 -->
+  <modules>  
+	<module>proj04-maven-module</module>
+    <module>proj05-maven-module</module>
+    <module>proj06-maven-module</module>
+  </modules>
+  
+  <!-- 使用dependencyManagement标签配置对依赖的管理 -->
+<!-- 被管理的依赖并没有真正被引入到工程 -->
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			
+			<!-- 引用上面properties 自定义的标签 -->
+			<version>${com.zhouge.springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${com.zhouge.springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${com.zhouge.springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${com.zhouge.springVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${com.zhouge.springVersion}</version>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+  
+  
+</project>
